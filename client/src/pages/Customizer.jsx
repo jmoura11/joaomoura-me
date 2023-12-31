@@ -89,6 +89,9 @@ const Customizer = () => {
       handleActiveFilterTab(decalType.filterTab);
     }
   };
+  /* The current implementation in your Customizer component allows 
+for the possibility that both logoShirt and stylishShirt could be
+active at the same time. 
 
   const handleActiveFilterTab = (tabName) => {
     switch (tabName) {
@@ -103,6 +106,21 @@ const Customizer = () => {
         state.isFullTexture = false;
         break;
     }
+*/
+
+  const handleActiveFilterTab = (tabName) => {
+    const isLogoShirt = tabName === "logoShirt";
+    const isStylishShirt = tabName === "stylishShirt";
+
+    // Update the state properties accordingly
+    state.isLogoTexture = isLogoShirt;
+    state.isFullTexture = isStylishShirt;
+
+    // Set the activeFilterTab state to reflect the current active tab
+    setActiveFilterTab({
+      logoShirt: isLogoShirt,
+      stylishShirt: isStylishShirt,
+    });
 
     // after setting the state, activeFilterTab is updated
 
@@ -166,7 +184,13 @@ const Customizer = () => {
                 key={tab.name}
                 tab={tab}
                 isFilterTab
-                isActiveTab={activeFilterTab[tab.name]}
+                isActiveTab={
+                  tab.name === "logoShirt"
+                    ? state.isLogoTexture
+                    : tab.name === "stylishShirt"
+                    ? state.isFullTexture
+                    : false
+                }
                 handleClick={() => handleActiveFilterTab(tab.name)}
               />
             ))}
