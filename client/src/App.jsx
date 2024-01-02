@@ -1,6 +1,7 @@
 import CanvasModel from "./canvas";
 import Customizer from "./pages/Customizer";
 import Home from "./pages/Home";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Home />
       <CanvasModel />
       <Customizer />
+      <LandingPage />
     </main>
   );
 }
